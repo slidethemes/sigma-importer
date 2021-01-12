@@ -38,12 +38,34 @@ class WP_Import extends WP_Importer{
 	var $featured_images = array();
 
 	var $logger;
+	var $reserved_menu_keys;
 
 	public function __construct( $logger = null ){
 
 		// Set logger to the importer.
 		$this->logger = $logger;
 
+	}
+
+	public function set_processed_importer_data(){
+
+		$data = [
+			'processed_authors' => $this->processed_authors,
+			'author_mapping' => $this->author_mapping,
+			'processed_terms' => $this->processed_terms,
+			'processed_posts' => $this->processed_posts,
+			'post_orphans' => $this->post_orphans,
+			'processed_menu_items' => $this->processed_menu_items,
+			'menu_item_orphans' => $this->menu_item_orphans,
+			'missing_menu_items' => $this->missing_menu_items
+		];
+
+		set_transient( 'ss_importer/processed_importer_data', $data, 0.1 * HOUR_IN_SECONDS );
+
+	}
+
+	public function get_processed_importer_data(){
+		return get_transient( 'ss_importer/processed_importer_data' );
 	}
 
 	/**
@@ -84,6 +106,7 @@ class WP_Import extends WP_Importer{
 	 * @param string $file Path to the WXR file for importing
 	 */
 	function import( $file, $options ) {
+
 		add_filter( 'import_post_meta_key', array( $this, 'is_valid_meta_key' ) );
 		add_filter( 'http_request_timeout', array( &$this, 'bump_request_timeout' ) );
 
@@ -153,6 +176,32 @@ class WP_Import extends WP_Importer{
 		$this->categories = $import_data['categories'];
 		$this->tags = $import_data['tags'];
 		$this->base_url = esc_url( $import_data['base_url'] );
+		$this->reserved_menu_keys = apply_filters( 'ss_importer/reserved_menu_keys', array(
+			'_menu_item_object_id',
+			'_menu_item_object',
+			'_menu_item_menu_item_parent',
+			'_menu_item_position',
+			'_menu_item_type',
+			'_menu_item_title',
+			'_menu_item_url',
+			'_menu_item_description',
+			'_menu_item_attr-title',
+			'_menu_item_target',
+			'_menu_item_classes',
+			'_menu_item_xfn',
+			'_menu_item_status'
+		));
+
+		$data = $this->get_processed_importer_data();
+
+		$this->processed_authors = isset($data['processed_authors']) && !empty($data['processed_authors']) ? $data['processed_authors'] : array();
+		$this->author_mapping = isset($data['author_mapping']) && !empty($data['author_mapping']) ? $data['author_mapping'] : array();
+		$this->processed_terms = isset($data['processed_terms']) && !empty($data['processed_terms']) ? $data['processed_terms'] : array();
+		$this->processed_posts = isset($data['processed_posts']) && !empty($data['processed_posts']) ? $data['processed_posts'] : array();
+		$this->post_orphans = isset($data['post_orphans']) && !empty($data['post_orphans']) ? $data['post_orphans'] : array();
+		$this->processed_menu_items = isset($data['processed_menu_items']) && !empty($data['processed_menu_items']) ? $data['processed_menu_items'] : array();
+		$this->menu_item_orphans = isset($data['menu_item_orphans']) && !empty($data['menu_item_orphans']) ? $data['menu_item_orphans'] : array();
+		$this->missing_menu_items = isset($data['missing_menu_items']) && !empty($data['missing_menu_items']) ? $data['missing_menu_items'] : array();
 
 		wp_defer_term_counting( true );
 		wp_defer_comment_counting( true );
@@ -174,6 +223,8 @@ class WP_Import extends WP_Importer{
 
 		wp_defer_term_counting( false );
 		wp_defer_comment_counting( false );
+
+		delete_transient('ss_importer/processed_importer_data');
 
 		do_action( 'import_end' );
 	}
@@ -500,6 +551,8 @@ class WP_Import extends WP_Importer{
 	function process_posts() {
 		$this->posts = apply_filters( 'wp_import_posts', $this->posts );
 
+		$data = $this->get_processed_importer_data();
+
 		foreach ( $this->posts as $post ) {
 			$post = apply_filters( 'wp_import_post_data_raw', $post );
 
@@ -528,12 +581,12 @@ class WP_Import extends WP_Importer{
 
 			$post_type_object = get_post_type_object( $post['post_type'] );
 
-			// Is this type even valid?
+			// Not a valid post type
 			if ( ! $post_type_object ) {
 				$this->logger->warning( sprintf(
 					__( 'Failed to import "%s": Invalid post type %s', 'ss-importer' ),
-					$data['post_title'],
-					$data['post_type']
+					$post['post_title'],
+					$post['post_type']
 				) );
 				return false;
 			}
@@ -559,7 +612,7 @@ class WP_Import extends WP_Importer{
 				$this->logger->info( sprintf(
 					__( '%s "%s" already exists.', 'ss-importer' ),
 					$post_type_object->labels->singular_name,
-					$data['post_title']
+					esc_html($post['post_title'])
 				) );
 
 				$comment_post_ID = $post_id = $post_exists;
@@ -670,9 +723,7 @@ class WP_Import extends WP_Importer{
 							continue;
 						}
 					}
-
 					$terms_to_set[$taxonomy][] = intval( $term_id );
-
 				}
 
 				foreach ( $terms_to_set as $tax => $ids ) {
@@ -790,6 +841,8 @@ class WP_Import extends WP_Importer{
 		if ( 'draft' == $item['status'] )
 			return;
 
+		$original_meta = $item['postmeta'];
+
 		$menu_slug = false;
 		if ( isset($item['terms']) ) {
 			// loop through terms, assume first nav_menu term is correct menu
@@ -803,11 +856,13 @@ class WP_Import extends WP_Importer{
 
 		// no nav_menu term associated with this menu item
 		if ( ! $menu_slug ) {
+			$this->logger->warning( __('Menu item skipped due to missing menu slug', 'ss-importer') );
 			return;
 		}
 
 		$menu_id = term_exists( $menu_slug, 'nav_menu' );
 		if ( ! $menu_id ) {
+			$this->logger->warning( sprintf( __( 'Menu item skipped due to invalid menu slug: %s', 'ss-importer' ), esc_html( $menu_slug ) ) );
 			return;
 		} else {
 			$menu_id = is_array( $menu_id ) ? $menu_id['term_id'] : $menu_id;
@@ -855,14 +910,22 @@ class WP_Import extends WP_Importer{
 		);
 
 		$id = wp_update_nav_menu_item( $menu_id, 0, $args );
-		if ( $id && ! is_wp_error( $id ) ){
+		if ( $id && ! is_wp_error( $id ) && !isset($this->processed_menu_items[intval($item['post_id'])]) )
 			$this->processed_menu_items[intval($item['post_id'])] = (int) $id;
-		}else{
-			$this->logger->warning( sprintf(
-				__( 'Failed to insert menu item %s, the following error occured: %s', 'ss-importer' ),
-				$item['post_title'],
-				$id->get_error_message()
-			));
+
+		// Update custom nav meta values
+		if( isset( $original_meta ) ){
+			foreach( $original_meta as $meta ){
+
+				$key = $meta['key'];
+				$value = false;
+
+				if ( empty($value) && !in_array( $key, $this->reserved_menu_keys ) ){
+					$value = maybe_unserialize( $meta['value'] );
+					update_post_meta( $id, $key, $value );
+				}
+
+			}
 		}
 
 	}

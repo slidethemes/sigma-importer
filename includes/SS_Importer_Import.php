@@ -83,38 +83,55 @@ class SS_Importer_Import extends SS_Importer_Import_Helper{
     // Try and increase the php memory limit to avoid having the importer crashing
     ini_set( 'memory_limit', apply_filters( 'ss_importer/php/memory_limit', '350M' ) );
 
-    // Set the start time of the importer
-    SS_Helper::set_import_start_time();
+    if( !SS_Helper::get_import_start_time() ){
 
-    // Execute custom user action
-    do_action('ss_importer/before_import_content');
+      // Set the start time of the importer
+      SS_Helper::set_import_start_time();
 
-    // Get the log path
-    $this->log_path = SS_File_Manager::get_log_path();
+      // Execute custom user action
+      do_action('ss_importer/before_import_content');
 
-    $this->selected_demo_index = !empty( $_FILES ) ? $this->set_manual_import_files( $_FILES, $this->log_path ) : sanitize_text_field( $_POST['selectedDemo'] );
+      // Get the log path
+      $this->log_path = SS_File_Manager::get_log_path();
 
-    // Are we using predefined import files?
-    if ( empty( $_FILES ) && !empty( $this->get_selected_demo( $this->selected_demo_index ) ) ) {
+      $this->selected_demo_index = !empty( $_FILES ) ? $this->set_manual_import_files( $_FILES, $this->log_path ) : sanitize_text_field( $_POST['selectedDemo'] );
 
-      // Add this message to log file.
-      SS_File_Manager::append_to_file(
-        sprintf(
-          __( 'The import files for %s were used.', 'ss-importer' ),
-          $this->get_demo_name( $this->get_selected_demo( $this->selected_demo_index ) )
-        ). SS_Helper::import_file_info( $this->get_selected_demo( $this->selected_demo_index ) ),
-        $this->log_path,
-        esc_html__( 'Demo Import files' , 'ss-importer' )
-      );
+      // Are we using predefined import files?
+      if ( empty( $_FILES ) && !empty( $this->get_selected_demo( $this->selected_demo_index ) ) ) {
 
-    } else if( empty( $_FILES ) ) {
-      // Send JSON Error response to the AJAX call.
-      $this->response = array(
-        'status'  => 'error',
-        'message' => esc_html__( 'No import files specified!', 'ss-importer' )
-      );
-      wp_send_json( $this->response );
-      die();
+        // Add this message to log file.
+        SS_File_Manager::append_to_file(
+          sprintf(
+            __( 'The import files for %s were used.', 'ss-importer' ),
+            $this->get_demo_name( $this->get_selected_demo( $this->selected_demo_index ) )
+          ). SS_Helper::import_file_info( $this->get_selected_demo( $this->selected_demo_index ) ),
+          $this->log_path,
+          esc_html__( 'Demo Import files' , 'ss-importer' )
+        );
+
+      } else if( empty( $_FILES ) ) {
+        // Send JSON Error response to the AJAX call.
+        $this->response = array(
+          'status'  => 'error',
+          'message' => esc_html__( 'No import files specified!', 'ss-importer' )
+        );
+        wp_send_json( $this->response );
+        die();
+      }
+
+      $data = [
+        'log_path' => $this->log_path,
+        'selected_demo_index' => $this->selected_demo_index
+      ];
+
+      SS_Helper::set_import_data( $data );
+
+    }else{
+
+      $data = SS_Helper::get_import_data( $data );
+      $this->selected_demo_index = $data['selected_demo_index'];
+      $this->log_path = $data['log_path'];
+
     }
 
     $this->import_content( $this->get_xml_file( $this->get_selected_demo( $this->selected_demo_index ) ) );
@@ -152,7 +169,6 @@ class SS_Importer_Import extends SS_Importer_Import_Helper{
     ));
 
     $logger = SS_Importer()->ss_logger;
-
     $this->wp_import = new WP_Import( $logger );
     $this->wp_import->fetch_attachments = apply_filters( 'ss_importer/fetch_attachments', true );
 
@@ -198,8 +214,10 @@ class SS_Importer_Import extends SS_Importer_Import_Helper{
         $this->log_path,
         esc_html__( 'Errors' , 'ss-importer' )
       );
-
     }
+
+    delete_transient('ss_importer/import_start_time');
+    delete_transient('ss_importer/import_data');
 
     wp_send_json( $this->response );
     die();
@@ -414,6 +432,8 @@ class SS_Importer_Import extends SS_Importer_Import_Helper{
 				'status'  => 'heartbeat',
 				'message' => esc_html__('Let\'s run another ajax call', 'ss-importer'),
 			);
+
+      $this->wp_import->set_processed_importer_data();
 
 			// Send the request for a new AJAX call.
 			wp_send_json( $this->response );

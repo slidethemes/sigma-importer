@@ -21,7 +21,35 @@ class SS_Helper{
 	 */
 	public static function set_import_start_time() {
 		self::$import_start_time = date( apply_filters( 'ss_importer/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
+    set_transient( 'ss_importer/import_start_time', self::$import_start_time, 0.1 * HOUR_IN_SECONDS );
 	}
+
+  /**
+	 * Get the $import_start_time class variable with the current date and time string.
+   *
+   * @since 1.0.0
+	 */
+  public static function get_import_start_time(){
+    return get_transient('ss_importer/import_start_time');
+  }
+
+  /**
+   * Set the status of our import data for the try_renew_heartbeat method
+   *
+   * @since 1.0.0
+   */
+  public static function set_import_data( $data ){
+    set_transient( 'ss_importer/import_data', $data, 0.1 * HOUR_IN_SECONDS );
+  }
+
+  /**
+   * Get the status of the previous try_renew_heartbeat
+   *
+   * @since 1.0.0
+   */
+  public static function get_import_data(){
+    return get_transient( 'ss_importer/import_data' );
+  }
 
   /**
 	 * Get import file information and max execution time.

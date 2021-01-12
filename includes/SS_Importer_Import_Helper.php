@@ -115,34 +115,7 @@ class SS_Importer_Import_Helper{
   */
   public function get_demos(){
 
-    $test = [
-      array(
-        'file_name'              => 'Demo Import 1',
-        'description'            => __( 'After you import this demo, you will have to setup the slider separately.', 'your-textdomain' ),
-        'front_page'             => 'Home',
-        'blog_page'              => 'Blog',
-        'menus'                  => array(
-          'primary-menu'  =>  'Primary Menu',
-          'mobile-menu'   =>  'Mobile Menu',
-          'top-menu'      =>  'Top Header Menu',
-          'menu-left'     =>  '',
-          'menu-right'    =>  '',
-        ),
-        'import_file'            => SS_IMPORTER_PATH .'samples/content.xml',
-        'import_widget_file'     => SS_IMPORTER_PATH .'samples/widget.wie',
-        'import_redux' => array(
-          array(
-            'import_redux_file' =>  SS_IMPORTER_PATH .'samples/redux.json',
-            'opt_name'       => 'miranda_hotel_options',
-          ),
-        ),
-        'preview_thumb'   => SS_IMPORTER_URL .'samples/thumb.jpg',
-        'preview_url'     => 'http://www.your_domain.com/my-demo-1',
-        'sliders'         => array( SS_IMPORTER_PATH . 'samples/home-1.zip', SS_IMPORTER_PATH . 'samples/home-2.zip', SS_IMPORTER_PATH . 'samples/home-3.zip', SS_IMPORTER_PATH . 'samples/slider-1.zip', SS_IMPORTER_PATH . 'samples/slider-2.zip' )
-      ),
-    ];
-
-    return SS_Helper::validate_content_files( apply_filters( 'ss_importer/importer_custom_demos' , $test ) );
+    return SS_Helper::validate_content_files( apply_filters( 'ss_importer/importer_custom_demos' , [] ) );
 
   }
 

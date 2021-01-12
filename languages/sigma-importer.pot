@@ -1,0 +1,592 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-06 11:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: sigma-importer.php:287
+#, php-format
+msgid "\"%1$s\" requires \"%2$s\" version %3$s or greater."
+msgstr ""
+
+#: sigma-importer.php:288 includes/SS_File_Manager.php:244
+#: includes/SS_Importer_Import_Helper.php:74
+#: includes/SS_Template_Actions.php:150
+msgid "Sigma Importer"
+msgstr ""
+
+#: sigma-importer.php:289
+msgid "PHP"
+msgstr ""
+
+#: includes/SS_File_Manager.php:88 includes/SS_File_Manager.php:127
+#, php-format
+msgid ""
+"An error occurred while writing file to your server! Tried to write a file "
+"to: %s%s."
+msgstr ""
+
+#: includes/SS_File_Manager.php:168
+msgid "Sigma Importer - "
+msgstr ""
+
+#: includes/SS_File_Manager.php:211
+#, php-format
+msgid ""
+"An error occurred while reading a file from your server! Tried reading file "
+"from path: %s%s."
+msgstr ""
+
+#: includes/SS_File_Manager.php:233
+#, php-format
+msgid ""
+"This WordPress page does not have %sdirect%s write file access. This plugin "
+"needs it in order to save the demo import xml file to the upload directory "
+"of your site. You can change this setting with these instructions: %s."
+msgstr ""
+
+#: includes/SS_File_Manager.php:245 includes/SS_Importer_Import_Helper.php:75
+msgid "Demo Importer"
+msgstr ""
+
+#: includes/SS_File_Manager.php:256
+msgid ""
+"An error occurred while retrieving reading/writing permissions to your "
+"server (could not retrieve WP filesystem credentials)!"
+msgstr ""
+
+#: includes/SS_File_Manager.php:264
+msgid "Your WordPress login credentials don't allow to use WP_Filesystem!"
+msgstr ""
+
+#: includes/SS_Helper.php:42
+#, php-format
+msgid "Initial max execution time = %s seconds"
+msgstr ""
+
+#: includes/SS_Helper.php:46
+#, php-format
+msgid ""
+"Files info:%1$sSite URL = %2$s%1$sContent file = %3$s%1$sWidget file = %4$s"
+"%1$sRedux files:%1$s%5$s"
+msgstr ""
+
+#: includes/SS_Helper.php:49 includes/SS_Helper.php:50
+#: includes/SS_Helper.php:51
+msgid "not defined!"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:103
+#, php-format
+msgid "The import files for %s were used."
+msgstr ""
+
+#: includes/SS_Importer_Import.php:107
+msgid "Demo Import files"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:114
+msgid "No import files specified!"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:188
+msgid "The demo import has finished, Happy blogging!"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:192
+#, php-format
+msgid ""
+"The demo import has finished, however, some issues were found. You can check "
+"the status and the errors of the import process in this %1$slog file%2$s"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:199
+msgid "Errors"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:251
+msgid "Importing Redux"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:259
+#, php-format
+msgid "Redux options with option name \"%s\" imported successfully"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:263 includes/SS_Importer_Import.php:278
+msgid "Importing Redux settings"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:270
+msgid "The Redux plugin is not activated, so the Redux import was skipped!"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:304
+msgid ""
+"The Revolution plugin is not activated, so the Slider Revolution import was "
+"skipped!"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:312
+msgid "Importing Slider Revolution sliders"
+msgstr ""
+
+#: includes/SS_Importer_Import.php:415
+msgid "Let's run another ajax call"
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:101
+msgid ""
+"Your server is running PHP on safe mode. You might have some issues while "
+"importing a demo. To disable safe mode, please contact your hosting provider"
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:104
+msgid ""
+"The theme doesn't support any custom import files. Please use the manual "
+"importer to get started."
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:184
+msgid "No content file provided."
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:185
+msgid "No .wie file provided."
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:187
+msgid "No .json file provided."
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:202
+#, php-format
+msgid "Content file was not uploaded. Error: %s"
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:206
+msgid "Content file Error"
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:223
+#, php-format
+msgid "Widget file was not uploaded. Error: %s"
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:227
+msgid "Widget file Error"
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:241
+msgid "Redux file provided, but redux options name was not."
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:243
+#: includes/SS_Importer_Import_Helper.php:264
+msgid "Redux file Error"
+msgstr ""
+
+#: includes/SS_Importer_Import_Helper.php:260
+#, php-format
+msgid "Redux Options file was not uploaded. Error: %s"
+msgstr ""
+
+#: includes/SS_Importer_Plugins_Manager.php:88
+msgid ""
+"Some plugins are pending activation or installation, please activate all "
+"theme required plugins before importing"
+msgstr ""
+
+#: includes/SS_Importer_System.php:66
+msgid "System Status"
+msgstr ""
+
+#: includes/SS_Importer_Widgets.php:24 includes/SS_Importer_Widgets.php:37
+msgid "Importing widgets"
+msgstr ""
+
+#: includes/SS_Importer_Widgets.php:91
+msgid "Widget import file could not be found."
+msgstr ""
+
+#: includes/SS_Importer_Widgets.php:127
+msgid ""
+"Error: Widget import data could not be read. Please try a different file."
+msgstr ""
+
+#: includes/SS_Importer_Widgets.php:162
+msgid "Widget area does not exist in theme (using Inactive)"
+msgstr ""
+
+#: includes/SS_Importer_Widgets.php:184
+msgid "Site does not support widget"
+msgstr ""
+
+#: includes/SS_Importer_Widgets.php:208
+msgid "Widget already exists"
+msgstr ""
+
+#: includes/SS_Importer_Widgets.php:281
+msgid "Imported"
+msgstr ""
+
+#: includes/SS_Importer_Widgets.php:281
+msgid "Imported to Inactive"
+msgstr ""
+
+#: includes/SS_Importer_Widgets.php:287
+msgid "No Title"
+msgstr ""
+
+#: includes/SS_Importer_Widgets.php:306
+msgid "No results for widget import!"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:36
+msgid "Content Import - .xml file"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:38
+msgid "Please select the .xml file which you need to import"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:51
+msgid "Widget Import - .wie file"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:53
+msgid "Please select the .wie file which you need to import"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:69
+msgid "Redux Options Import - .json file"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:71
+msgid "Please select the .json file which you need to import"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:74
+msgid "Enter the Redux options name, also refers to opt_name"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:87
+msgid "Import Content"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:113
+msgid "Importing..."
+msgstr ""
+
+#: includes/SS_Template_Actions.php:134
+msgid "Import Complete"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:135
+msgid "Visit Site"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:136
+msgid "Try Another"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:150
+msgid "Welcome to"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:151
+msgid "Version"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:154
+msgid "Some notes about the importer"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:156
+msgid "All your existing content will remain the same"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:157
+msgid ""
+"The content from the new file you are importing will get added on top of "
+"your existing content"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:158
+msgid "Import might take some time, based on your hosting"
+msgstr ""
+
+#: includes/SS_Template_Actions.php:159
+msgid "Happy Importing!"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:63
+msgid "Redux import file could not be found."
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:77
+msgid "Redux import data could not be read. Please try a different file."
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:95
+msgid "Content import error: "
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:141
+msgid "The content file does not exist"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:147
+msgid "Content import parse error: "
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:216
+#, php-format
+msgid ""
+"Failed to import author %s. Their posts will be attributed to the current "
+"user."
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:276
+#, php-format
+msgid ""
+"Failed to create new user for %1$s. Their posts will be attributed to the "
+"current user: %2$s"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:329
+#, php-format
+msgid "Failed to insert category %1$s. The following error occured: %2$s"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:375
+#, php-format
+msgid "Failed to insert tag %1$s. The following error occured: %2$s"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:431
+#, php-format
+msgid "Failed to insert term %1$s. The following error occured: %2$s"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:526
+#, php-format
+msgid "Failed to import %s: Invalid post type %s"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:551
+#, php-format
+msgid "Failed to import \"%s\": Invalid post type %s"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:577
+#, php-format
+msgid "%s \"%s\" already exists."
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:643
+#, php-format
+msgid "Failed to process %s, the following error occured %s"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:680
+#, php-format
+msgid "Failed to import %s %s"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:823
+msgid "Menu item skipped due to missing menu slug"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:829
+#, php-format
+msgid "Menu item skipped due to invalid menu slug: %s"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:907
+msgid "Fetching attachments is not enabled"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:920
+msgid "Invalid file type"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:959
+msgid "Could not create temporary file."
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:978
+#, php-format
+msgid "Request failed due to an error: %1$s (%2$s)"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:994
+#, php-format
+msgid "Remote server returned the following unexpected result: %1$s (%2$s)"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:1006
+msgid "Remote server did not respond"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:1013
+msgid "Zero size file downloaded"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:1018
+msgid "Downloaded file has incorrect size"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:1024
+#, php-format
+msgid "Remote file is too large, limit is %s"
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:1056
+msgid "Sorry, this file type is not permitted for security reasons."
+msgstr ""
+
+#: includes/wp-importer/class-wp-import.php:1071
+msgid "The uploaded file could not be moved"
+msgstr ""
+
+#: includes/wp-importer/parsers/class-wxr-parser-regex.php:96
+#: includes/wp-importer/parsers/class-wxr-parser-simplexml.php:41
+#: includes/wp-importer/parsers/class-wxr-parser-simplexml.php:46
+#: includes/wp-importer/parsers/class-wxr-parser-xml.php:48
+msgid ""
+"This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr ""
+
+#: includes/wp-importer/parsers/class-wxr-parser-simplexml.php:29
+#: includes/wp-importer/parsers/class-wxr-parser-simplexml.php:37
+#: includes/wp-importer/parsers/class-wxr-parser.php:42
+msgid "There was an error when reading this WXR file"
+msgstr ""
+
+#: includes/wp-importer/parsers/class-wxr-parser.php:43
+msgid ""
+"Details are shown above. The importer will now try again with a different "
+"parser..."
+msgstr ""
+
+#: templates/page-import.php:30
+msgid "You are Good to Go!"
+msgstr ""
+
+#: templates/page-import.php:52
+msgid "All"
+msgstr ""
+
+#: templates/page-import.php:69
+msgid " sliders included"
+msgstr ""
+
+#: templates/page-import.php:78
+msgid "Import"
+msgstr ""
+
+#: templates/page-import.php:81
+msgid "Preview"
+msgstr ""
+
+#: templates/system-status.php:15
+msgid "Theme Status"
+msgstr ""
+
+#: templates/system-status.php:15
+msgid "General"
+msgstr ""
+
+#: templates/system-status.php:20
+msgid "Theme Name: "
+msgstr ""
+
+#: templates/system-status.php:24
+msgid "Current Version: "
+msgstr ""
+
+#: templates/system-status.php:33
+msgid "Wordpress Status"
+msgstr ""
+
+#: templates/system-status.php:38
+msgid "Home URL: "
+msgstr ""
+
+#: templates/system-status.php:42
+msgid "Site URL: "
+msgstr ""
+
+#: templates/system-status.php:46
+msgid "WP Version: "
+msgstr ""
+
+#: templates/system-status.php:50
+msgid "WP Multisite: "
+msgstr ""
+
+#: templates/system-status.php:55
+msgid "WP Debug Mode: "
+msgstr ""
+
+#: templates/system-status.php:60
+msgid "Language: "
+msgstr ""
+
+#: templates/system-status.php:69
+msgid "Server Status"
+msgstr ""
+
+#: templates/system-status.php:69
+msgid "Server Status (PHP)"
+msgstr ""
+
+#: templates/system-status.php:74
+msgid "PHP Memory Limit: "
+msgstr ""
+
+#: templates/system-status.php:78
+msgid "PHP Time Limit: "
+msgstr ""
+
+#: templates/system-status.php:82
+msgid "PHP Version: "
+msgstr ""
+
+#: templates/system-status.php:86
+msgid "PHP Post Max Size: "
+msgstr ""
+
+#: templates/system-status.php:86
+msgid "PHP Post Max Size:\t"
+msgstr ""
+
+#: templates/system-status.php:90
+msgid "ZipArchive: "
+msgstr ""
+
+#: templates/system-status.php:95
+msgid "MySQL Version: "
+msgstr ""
+
+#: templates/system-status.php:99
+msgid "Max Upload Size: "
+msgstr ""
+
+#: templates/system-status.php:99
+msgid "Max Upload Size:\t"
+msgstr ""
