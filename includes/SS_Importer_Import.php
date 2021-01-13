@@ -128,7 +128,7 @@ class SS_Importer_Import extends SS_Importer_Import_Helper{
 
     }else{
 
-      $data = SS_Helper::get_import_data( $data );
+      $data = SS_Helper::get_import_data();
       $this->selected_demo_index = $data['selected_demo_index'];
       $this->log_path = $data['log_path'];
 
