@@ -4,7 +4,7 @@ Tags: import, content, demo, data, widgets, redux, theme options
 Requires at least: 4.0
 Tested up to: 5.6
 Requires PHP: 5.3.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -37,22 +37,22 @@ function sigma_importer_import_files( $demos ) {
       'front_page'             => 'Home',
       'blog_page'              => 'Blog',
       'menus'                  => array(
-        'main_menu'  			 =>  'Main Menu',
+        'main_menu'        => 'Main Menu',
         'secondary_menu'   => 'Secondary Menu',
         'mobile_menu'      => 'Mobile Menu',
-				'top_menu'				 =>	'Top Menu',
-				'bottom_menu'			 =>	'Bottom Menu'
+        'top_menu'     => 'Top Menu',
+        'bottom_menu'      => 'Bottom Menu'
       ),
-      'import_file'            => trailingslashit( SIGMACORE_PATH ) . 'includes/sample-demos/default/content.xml',
-      'import_widget_file'     => trailingslashit( SIGMACORE_PATH ) . 'includes/sample-demos/default/widget.wie',
+      'import_file'            => YOUR_XML_FILE_PATH,
+      'import_widget_file'     => YOUR_WIDGET_WIE_PATH,
       'import_redux' => array(
         array(
-          'import_redux_file' =>  trailingslashit( SIGMACORE_PATH ) . 'includes/sample-demos/default/redux.json',
-          'opt_name'       => 'verna_options',
+          'import_redux_file' =>  YOUR_REDUX_JSON_PATH,
+          'opt_name'       => YOUR_THEME_OPTIONS_NAME,
         ),
       ),
-      'preview_thumb'   => trailingslashit( SIGMACORE_URL ) . 'includes/sample-demos/default/image/300x300.png',
-      'preview_url'     => 'http://primehostingindia.com/templatemonster/wp/verna/',
+      'preview_thumb'   => YOUR_PREVIEW_THUMBNAIL_URL,
+      'preview_url'     => YOUR_DEMO_PREVIEW_URL,
     ),
   ];
   return $demos;

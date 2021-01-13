@@ -3,7 +3,7 @@
 Plugin Name: Sigma Importer
 Plugin URI: https://wordpress.org/plugins/sigma-importer/
 Description: Import demo content with ease. Whether you are a developer adding one click demo import functionality to your theme, or you just want a quick import solution. This is the plugin for you.
-Version: 1.0.0
+Version: 1.0.1
 Author: Slidesigma
 Author URI: http://www.slidesigma.com
 License: GPL3
