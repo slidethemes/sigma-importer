@@ -36,6 +36,7 @@ class WP_Import extends WP_Importer{
 	var $fetch_attachments = false;
 	var $url_remap = array();
 	var $featured_images = array();
+	var $menu_items = array();
 
 	var $logger;
 	var $reserved_menu_keys;
@@ -57,7 +58,8 @@ class WP_Import extends WP_Importer{
 			'post_orphans' => $this->post_orphans,
 			'processed_menu_items' => $this->processed_menu_items,
 			'menu_item_orphans' => $this->menu_item_orphans,
-			'missing_menu_items' => $this->missing_menu_items
+			'missing_menu_items' => $this->missing_menu_items,
+			'menu_items'	=> $this->menu_items
 		];
 
 		set_transient( 'ss_importer/processed_importer_data', $data, 0.1 * HOUR_IN_SECONDS );
@@ -136,6 +138,13 @@ class WP_Import extends WP_Importer{
 			}
 		}
 
+		// Process menu items
+		if( !empty($this->menu_items) ){
+			foreach($this->menu_items as $item){
+				$this->process_menu_item($item);
+			}
+		}
+
 		wp_suspend_cache_invalidation( false );
 
 		// update incorrect/missing information in the DB
@@ -202,6 +211,7 @@ class WP_Import extends WP_Importer{
 		$this->processed_menu_items = isset($data['processed_menu_items']) && !empty($data['processed_menu_items']) ? $data['processed_menu_items'] : array();
 		$this->menu_item_orphans = isset($data['menu_item_orphans']) && !empty($data['menu_item_orphans']) ? $data['menu_item_orphans'] : array();
 		$this->missing_menu_items = isset($data['missing_menu_items']) && !empty($data['missing_menu_items']) ? $data['missing_menu_items'] : array();
+		$this->menu_items = isset($data['menu_items']) && !empty($data['menu_items']) ? $data['menu_items'] : array();
 
 		wp_defer_term_counting( true );
 		wp_defer_comment_counting( true );
@@ -574,8 +584,11 @@ class WP_Import extends WP_Importer{
 			if ( $post['status'] == 'auto-draft' )
 				continue;
 
+			// Save the menu items to be imported at the very end
 			if ( 'nav_menu_item' == $post['post_type'] ) {
-				$this->process_menu_item( $post );
+				if( !isset($this->menu_items[ $post['post_id'] ]) ){
+					$this->menu_items[ $post['post_id'] ] = $post;
+				}
 				continue;
 			}
 

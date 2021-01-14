@@ -4,7 +4,7 @@ Tags: import, content, demo, data, widgets, redux, theme options
 Requires at least: 4.0
 Tested up to: 5.6
 Requires PHP: 5.3.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3 or later
 
 Import your demo content, widgets and theme settings with one click. Theme authors! Enable simple demo import for your theme demo data.
@@ -61,7 +61,27 @@ function sigma_importer_import_files( $demos ) {
 add_filter( 'ss_importer/importer_custom_demos' , 'sigma_importer_import_files' );
 `
 
-As for now, the importer only supports local files. If you tried to add remote URL links for your content files, the importer will just ignore them.
+*As for now, the importer only supports local files. If you tried to add remote URL links for your content files, the importer will just ignore them.*
+
+**Wanna help us make Sigma Importer better?**
+
+Get access to the Sigma Importer [GitHub repository](https://github.com/slidethemes/sigma-importer).
+
+= 1.0.2 =
+
+*Release Date - January 13, 2021*
+
+* Fixed a bug where menu items would import twice if the importer took a lot of time.
+* Updated the readme.txt file to include some helpful actions and filters for developers
+
+= 1.0.1 =
+
+*Release Date - January 13, 2021*
+
+* Updated readme.txt
 
 = 1.0.0 =
+
+* Release Date - January 13, 2021*
+
 * Initial release!
